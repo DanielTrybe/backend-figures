@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Series {
+  id            String          @unique
+  serie         String
+  Figures_table Figures_table[]
+}
+
+model Manufacturers {
+  id            String          @unique
+  manufacturer  String
+  Figures_table Figures_table[]
+}
+
+model Figures_table {
+  id               String   @unique
+  name             String   @db.LongText
+  category         String   @db.LongText
+  price            String   @db.LongText
+  specifications   String   @db.LongText
+  releaseInfo      String   @db.LongText
+  details          String   @db.LongText
+  serieName        String   @db.VarChar(191)
+  manufacturerName String   @db.VarChar(191)
+  createdAt        DateTime @default(now())
+
+  manufacturer Manufacturers @relation(fields: [manufacturerName], references: [id])
+  series       Series        @relation(fields: [serieName], references: [id])
+  Images       Images[]
+}
+
+model Images {
+  id                String        @unique
+  link              String
+  figureReferenceID Figures_table @relation(fields: [id], references: [id])
+}
