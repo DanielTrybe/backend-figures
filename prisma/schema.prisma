@@ -42,5 +42,6 @@ model Figures_table {
 model Images {
   id                String        @unique
   link              String
-  figureReferenceID Figures_table @relation(fields: [id], references: [id])
+  figureID          String
+  figureReferenceID Figures_table @relation(fields: [figureID], references: [id])
 }
