@@ -7,9 +7,9 @@ export class GetFiguresController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     try {
-      await this.getFiguresUserCase.execute();
+      const figures = await this.getFiguresUserCase.execute();
 
-      return response.status(201).send();
+      return response.status(200).json(figures);
     } catch (err: any) {
       return response
         .status(400)
