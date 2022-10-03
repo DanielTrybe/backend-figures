@@ -10,6 +10,8 @@ export class MySQLUserRepository implements IFiguresRepositoryRule {
       where: { id },
       include: {
         Images: true,
+        Series: true,
+        Manufacturers: true,
       },
     });
 
@@ -24,6 +26,8 @@ export class MySQLUserRepository implements IFiguresRepositoryRule {
     const figures = await this.prisma.figures_table.findMany({
       include: {
         Images: true,
+        Series: true,
+        Manufacturers: true,
       },
     });
 

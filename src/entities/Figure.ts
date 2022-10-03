@@ -6,8 +6,10 @@ export class Figure {
   public specifications: String;
   public releaseInfo: String;
   public details: String;
-  public serieName: String;
-  public manufacturerName: String;
-  public Images: Array<{ id: string; link: string; figureID: string }>;
+  public serieID: Number;
+  public manufacturerID: Number;
+  public Images: Array<{ id: Number; link: string; figureID: string }>;
+  public Series: Array<{ id: Number; serie: string }>;
+  public Manufacturers: Array<{ id: Number; manufacturer: string }>;
   public createdAt: Date;
 }
