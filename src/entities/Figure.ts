@@ -7,9 +7,9 @@ export class Figure {
   public releaseInfo: String;
   public details: String;
   public serieID: Number;
-  public manufacturerID: Number;
-  public Images: Array<{ id: Number; link: string; figureID: string }>;
-  public Series: Array<{ id: Number; serie: string }>;
-  public Manufacturers: Array<{ id: Number; manufacturer: string }>;
+  public manufacturersID: Number;
+  public Images: Array<{ id: Number; link: string; figureID: number }>;
+  // public Series: Array<{ id: Number; serie: string }>;
+  // public Manufacturers: Array<{ id: Number; manufacturer: string }>;
   public createdAt: Date;
 }
