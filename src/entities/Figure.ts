@@ -1,5 +1,5 @@
 export class Figure {
-  public id: String;
+  public id: number;
   public name: String;
   public category: String;
   public price: String;
@@ -7,7 +7,7 @@ export class Figure {
   public releaseInfo: String;
   public details: String;
   public serieID: Number;
-  public manufacturersID: Number;
+  public manufacturerID: Number;
   public Images: Array<{ id: Number; link: string; figureID: number }>;
   // public Series: Array<{ id: Number; serie: string }>;
   // public Manufacturers: Array<{ id: Number; manufacturer: string }>;

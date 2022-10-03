@@ -5,7 +5,7 @@ import { PrismaClient } from "@prisma/client";
 export class MySQLUserRepository implements IFiguresRepositoryRule {
   private prisma = new PrismaClient();
 
-  async findByID(id: string): Promise<Figure | boolean> {
+  async findByID(id: number): Promise<Figure | boolean> {
     const figure = await this.prisma.figures.findUnique({
       where: { id },
       include: {
