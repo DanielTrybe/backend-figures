@@ -10,41 +10,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Figures_table {
-  id             String @id @unique
-  name           String @db.LongText
-  category       String @db.LongText
-  price          String @db.LongText
-  specifications String @db.LongText
-  releaseInfo    String @db.LongText
-  details        String @db.LongText
-
-  createdAt DateTime @default(now())
-
-  // manufacturer Manufacturers @relation(fields: [manufacturerName], references: [id])
-  // series       Series        @relation(fields: [serieName], references: [id])
-  Series         Series[]
+model Figures {
+  id             Int           @id @default(autoincrement())
+  name           String        @db.LongText
+  category       String        @db.LongText
+  price          String        @db.LongText
+  specifications String        @db.LongText
+  releaseInfo    String        @db.LongText
+  details        String        @db.LongText
+  createdAt      DateTime      @default(now())
+  serieID        Int
+  manufacturerID Int
   Images         Images[]
-  Manufacturers  Manufacturers[]
-  serieID        Int             @unique
-  manufacturerID Int             @unique
+  Serie          Series        @relation(fields: [serieID], references: [id])
+  Manufacturer   Manufacturers @relation(fields: [manufacturerID], references: [id])
 }
 
 model Series {
-  id               Int           @id @unique @default(autoincrement())
-  serie            String
-  serieReferenceID Figures_table @relation(fields: [id], references: [serieID])
+  id      Int       @id @unique @default(autoincrement())
+  serie   String
+  Figures Figures[]
 }
 
 model Manufacturers {
-  id                      Int           @id @unique @default(autoincrement())
-  manufacturer            String
-  manufacturerReferenceID Figures_table @relation(fields: [id], references: [manufacturerID])
+  id           Int    @id @unique @default(autoincrement())
+  manufacturer String
+
+  Figures Figures[]
 }
 
 model Images {
-  id                Int           @id @unique @default(autoincrement())
+  id                Int     @id @default(autoincrement())
   link              String
-  figureID          String
-  figureReferenceID Figures_table @relation(fields: [figureID], references: [id])
+  figureID          Int
+  figureReferenceID Figures @relation(fields: [figureID], references: [id])
 }
