@@ -1,4 +1,4 @@
-import { uuid } from "uuidv4";
+// import { uuid } from "uuidv4";
 
 export class NewFigure {
   public id: String;
@@ -12,13 +12,13 @@ export class NewFigure {
   public manufacturerName: String;
   public createdAt: Date;
 
-  constructor(props: NewFigure, id?: string) {
-    Object.assign(this, props);
+  // constructor(props: NewFigure, id?: string) {
+  //   Object.assign(this, props);
 
-    if (!id) {
-      this.id = uuid();
-    }
-  }
+  //   if (!id) {
+  //     this.id = uuid();
+  //   }
+  // }
 }
 
 export class NewImages {
