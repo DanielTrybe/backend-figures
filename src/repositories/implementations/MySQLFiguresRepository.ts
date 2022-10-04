@@ -23,6 +23,8 @@ export class MySQLUserRepository implements IFiguresRepositoryRule {
   async findAllFigures(): Promise<Figure[] | boolean> {
     const figures = await this.prisma.figures.findMany({
       include: {
+        Serie: { select: { serie: true } },
+        Manufacturer: { select: { manufacturer: true } },
         Images: true,
       },
     });
