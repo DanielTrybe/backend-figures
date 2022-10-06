@@ -15,6 +15,7 @@ export class CreateFigureUseCase {
     if (!newfigure) {
       throw new Error("Failed to create a new figure, verify json input");
     }
+    return newfigure;
   }
 
   async executeCreateImages(data: ICreateImagesDTO[]) {

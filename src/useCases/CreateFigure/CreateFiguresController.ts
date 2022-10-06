@@ -8,9 +8,9 @@ export class CreateFigureController {
     const { data } = request.body;
 
     try {
-      await this.createFigureUserCase.executeCreateFigure(data);
+      const figure = await this.createFigureUserCase.executeCreateFigure(data);
 
-      return response.status(201).send("Successful create a new figure");
+      return response.status(201).json({ figure, message: "Sucess" });
     } catch (err: any) {
       return response
         .status(400)
@@ -25,11 +25,9 @@ export class CreateFigureController {
 
       return response.status(201).send("Successful add images to the figureID");
     } catch (err: any) {
-      return response
-        .status(400)
-        .json({
-          message: err.message || "Failed to add images to the figureID",
-        });
+      return response.status(400).json({
+        message: err.message || "Failed to add images to the figureID",
+      });
     }
   }
 
@@ -56,11 +54,9 @@ export class CreateFigureController {
 
       return response.status(201).send("Successful created a new manufacturer");
     } catch (err: any) {
-      return response
-        .status(400)
-        .json({
-          message: err.message || "Failed to create a new manufacturer",
-        });
+      return response.status(400).json({
+        message: err.message || "Failed to create a new manufacturer",
+      });
     }
   }
 }
