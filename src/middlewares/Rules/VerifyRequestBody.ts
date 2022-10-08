@@ -7,25 +7,90 @@ export class VerifyRequestsBody implements IMiddlewaresRules {
     res: Response,
     next: NextFunction
   ): Response | any {
-    const data = req.body.data;
-    console.log(data.name);
-    switch (data) {
-      case !data.name:
-        return res.status(400).json({ message: "Missing name" });
-      case !data.category:
-        return res.status(400).json({ message: "Missing category" });
-      case !data.price:
-        return res.status(400).json({ message: "Missing price" });
-      case !data.specifications:
-        return res.status(400).json({ message: "Missing specifications" });
-      case !data.releaseInfo:
-        return res.status(400).json({ message: "Missing releaseInfo" });
-      case !data.serieID:
-        return res.status(400).json({ message: "Missing serieID" });
-      case !data.manufacturerID:
-        return res.status(400).json({ message: "Missing manufacturerID" });
-      default:
-        return next();
+    const { data } = req.body;
+
+    const tags = [
+      { name: "name", type: "string" },
+      { name: "category", type: "string" },
+      { name: "price", type: "string" },
+      { name: "specifications", type: "string" },
+      { name: "releaseInfo", type: "string" },
+      { name: "serieID", type: 0 },
+      { name: "manufacturerID", type: 0 },
+    ];
+
+    for (let i = 0; i < tags.length; i++) {
+      if (!Object.keys(data).includes(tags[i].name)) {
+        return res.status(400).json({ message: `Missing ${tags[i]}` });
+      }
+      if (typeof data[tags[i].name] !== typeof tags[i].type) {
+        return res.status(400).json({
+          message: `${tags[i].name} must be a ${typeof tags[i].type}`,
+        });
+      }
     }
+    next();
+  }
+
+  verifyBodySerie(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Response | any {
+    const { serie } = req.body.data;
+
+    if (!serie) {
+      return res.status(400).json({ message: "Missing serie" });
+    }
+    if (typeof serie !== "string") {
+      return res.status(400).json({ message: "Serie must be a string" });
+    }
+    next();
+  }
+
+  verifyBodyImages(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Response | any {
+    const images = req.body.data;
+    const tags = ["link", "figureID"];
+
+    for (let i = 0; i < images.length; i++) {
+      if (JSON.stringify(tags) !== JSON.stringify(Object.keys(images[i]))) {
+        return res
+          .status(400)
+          .json({ message: `Missing tags, please verify your array` });
+      }
+
+      if (typeof images[i].figureID !== "number") {
+        return res.status(400).json({
+          message: `postion ${i} in the array, figureID must be a number`,
+        });
+      }
+
+      if (typeof images[i].link !== "string") {
+        return res.status(400).json({
+          message: `postion ${i} in the array, link must be a string`,
+        });
+      }
+    }
+    next();
+  }
+
+  verifyBodyManufacturer(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Response | any {
+    const { manufacturer } = req.body.data;
+
+    if (!manufacturer) {
+      return res.status(400).json({ message: "Missing manufacturer" });
+    }
+    if (typeof manufacturer !== "string") {
+      return res.status(400).json({ message: "manufacturer must be a string" });
+    }
+    next();
   }
 }
