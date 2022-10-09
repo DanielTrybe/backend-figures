@@ -1,7 +1,27 @@
 import { IMiddlewaresRules } from "../IMiddlewaresRules";
 import { Request, Response, NextFunction } from "express";
+import { figureBodySchema, figureSerieSchema } from "../zodschemas/schemasZod";
+import { ZodError } from "zod";
+
+class FormatError {
+  convertError(
+    err: ZodError
+  ): Array<{ message: string; key: (string | number)[]; code: number }> {
+    console.log(err);
+    return err.issues.map((err) => {
+      const error = {
+        message: err.message,
+        key: err.path,
+        code: 400,
+      };
+      return error;
+    });
+  }
+}
 
 export class VerifyRequestsBody implements IMiddlewaresRules {
+  constructor(private formatError: FormatError) {}
+
   verifyBodyFigure(
     req: Request,
     res: Response,
@@ -9,24 +29,20 @@ export class VerifyRequestsBody implements IMiddlewaresRules {
   ): Response | any {
     const { data } = req.body;
 
-    const tags = [
-      { name: "name", type: "string" },
-      { name: "category", type: "string" },
-      { name: "price", type: "string" },
-      { name: "specifications", type: "string" },
-      { name: "releaseInfo", type: "string" },
-      { name: "serieID", type: 0 },
-      { name: "manufacturerID", type: 0 },
-    ];
-
-    for (let i = 0; i < tags.length; i++) {
-      if (!Object.keys(data).includes(tags[i].name)) {
-        return res.status(400).json({ message: `Missing ${tags[i]}` });
-      }
-      if (typeof data[tags[i].name] !== typeof tags[i].type) {
-        return res.status(400).json({
-          message: `${tags[i].name} must be a ${typeof tags[i].type}`,
-        });
+    try {
+      figureBodySchema.parse(data);
+    } catch (err) {
+      if (err instanceof ZodError) {
+        return res.status(400).json(
+          err.issues.map((err) => {
+            const error = {
+              message: err.message,
+              key: err.path,
+              code: 400,
+            };
+            return error;
+          })
+        );
       }
     }
     next();
@@ -37,13 +53,23 @@ export class VerifyRequestsBody implements IMiddlewaresRules {
     res: Response,
     next: NextFunction
   ): Response | any {
-    const { serie } = req.body.data;
+    const { data } = req.body;
 
-    if (!serie) {
-      return res.status(400).json({ message: "Missing serie" });
-    }
-    if (typeof serie !== "string") {
-      return res.status(400).json({ message: "Serie must be a string" });
+    try {
+      figureSerieSchema.parse(data);
+    } catch (err) {
+      if (err instanceof ZodError) {
+        return res.status(400).json(
+          err.issues.map((err) => {
+            const error = {
+              message: err.message,
+              key: err.path,
+              code: 400,
+            };
+            return error;
+          })
+        );
+      }
     }
     next();
   }
