@@ -5,6 +5,7 @@ import {
   figureSerieSchema,
   figureImagesSchema,
   figureManufacturerSchema,
+  figureImagesUpdateSchema,
 } from "../zodschemas/schemasZod";
 import { ZodError } from "zod";
 
@@ -71,6 +72,26 @@ export class VerifyRequestsBody implements IMiddlewaresRules {
     try {
       images.every((image: { link: string; figureID: number }) =>
         figureImagesSchema.parse(image)
+      );
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const error = new FormatError();
+        return res.status(400).json(error.convertError(err));
+      }
+    }
+    next();
+  }
+
+  verifyBodyImagesUpdate(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Response | void {
+    const images = req.body.data;
+
+    try {
+      images.every((image: { id: number; link: string; figureID: number }) =>
+        figureImagesUpdateSchema.parse(image)
       );
     } catch (err) {
       if (err instanceof ZodError) {

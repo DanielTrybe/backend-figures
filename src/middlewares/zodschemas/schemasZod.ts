@@ -76,3 +76,36 @@ export const figureImagesSchema = z.object({
       message: `Key "serieID" must be a valid serie number and exists in object`,
     }),
 });
+
+export const figureImagesUpdateSchema = z.object({
+  id: z
+    .number({
+      required_error: "image id is required",
+      invalid_type_error:
+        "image id must be a number and must be defined, verify your array",
+    })
+    .positive({
+      message: "image id must be positive, verify your array",
+    })
+    .refine((val) => val, {
+      params: { httpError: 400 },
+      message: `Key "id" must be a valid id number and exists in object and database`,
+    }),
+  link: z.string().refine((val) => val.length > 5, {
+    params: { httpError: 400 },
+    message: `Key "link" must be a string, min 6 characters long and exists in object`,
+  }),
+  figureID: z
+    .number({
+      required_error: "figureID is required",
+      invalid_type_error:
+        "figureID must be a number and must be defined, verify your array",
+    })
+    .positive({
+      message: "figureID must be positive, verify your array",
+    })
+    .refine((val) => val, {
+      params: { httpError: 400 },
+      message: `Key "serieID" must be a valid serie number and exists in object`,
+    }),
+});
