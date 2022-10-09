@@ -20,7 +20,7 @@ class FormatError {
 }
 
 export class VerifyRequestsBody implements IMiddlewaresRules {
-  constructor(private formatError: FormatError) {}
+  constructor(public formatError: FormatError) {}
 
   verifyBodyFigure(
     req: Request,
@@ -33,16 +33,8 @@ export class VerifyRequestsBody implements IMiddlewaresRules {
       figureBodySchema.parse(data);
     } catch (err) {
       if (err instanceof ZodError) {
-        return res.status(400).json(
-          err.issues.map((err) => {
-            const error = {
-              message: err.message,
-              key: err.path,
-              code: 400,
-            };
-            return error;
-          })
-        );
+        const error = new FormatError();
+        return res.status(400).json(error.convertError(err));
       }
     }
     next();
