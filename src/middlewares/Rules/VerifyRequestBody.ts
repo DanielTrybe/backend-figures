@@ -29,7 +29,7 @@ export class VerifyRequestsBody implements IMiddlewaresRules {
     req: Request,
     res: Response,
     next: NextFunction
-  ): Response | any {
+  ): Response | void {
     const { data } = req.body;
 
     try {
@@ -47,7 +47,7 @@ export class VerifyRequestsBody implements IMiddlewaresRules {
     req: Request,
     res: Response,
     next: NextFunction
-  ): Response | any {
+  ): Response | void {
     const { data } = req.body;
 
     try {
@@ -65,7 +65,7 @@ export class VerifyRequestsBody implements IMiddlewaresRules {
     req: Request,
     res: Response,
     next: NextFunction
-  ): Response | any {
+  ): Response | void {
     const images = req.body.data;
 
     try {
@@ -85,7 +85,7 @@ export class VerifyRequestsBody implements IMiddlewaresRules {
     req: Request,
     res: Response,
     next: NextFunction
-  ): Response | any {
+  ): Response | void {
     const { data } = req.body;
 
     try {
