@@ -16,6 +16,11 @@ export interface IMiddlewaresRules {
     res: Response,
     next: NextFunction
   ): Response | void;
+  verifyBodyImagesUpdate(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Response | void;
   verifyBodyManufacturer(
     req: Request,
     res: Response,
