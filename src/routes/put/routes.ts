@@ -6,15 +6,15 @@ const routerPut = Router();
 const {
   verifyBodyFigure,
   verifyBodySerie,
-  verifyBodyImages,
   verifyBodyManufacturer,
+  verifyBodyImagesUpdate,
 } = new VerifyRequestsBody();
 
 routerPut.put("/update-figure", verifyBodyFigure, (req, res) => {
   return updateFigureController.handleFigure(req, res);
 });
 
-routerPut.put("/update-images", verifyBodyImages, (req, res) => {
+routerPut.put("/update-images", verifyBodyImagesUpdate, (req, res) => {
   return updateFigureController.handleImages(req, res);
 });
 
