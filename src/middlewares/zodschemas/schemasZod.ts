@@ -80,7 +80,7 @@ export const figureImagesSchema = z.object({
 export const figureImagesUpdateSchema = z.object({
   id: z
     .number({
-      required_error: "image id is required",
+      required_error: "image id is required, verify your array",
       invalid_type_error:
         "image id must be a number and must be defined, verify your array",
     })
