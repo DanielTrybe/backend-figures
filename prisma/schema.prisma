@@ -6,18 +6,18 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Figures {
   id             Int           @id @default(autoincrement())
-  name           String        @db.LongText
-  category       String        @db.LongText
-  price          String        @db.LongText
-  specifications String        @db.LongText
-  releaseInfo    String        @db.LongText
-  details        String        @db.LongText
+  name           String        @db.Text
+  category       String        @db.Text
+  price          String        @db.Text
+  specifications String        @db.Text
+  releaseInfo    String        @db.Text
+  details        String        @db.Text
   createdAt      DateTime      @default(now())
   serieID        Int
   manufacturerID Int
