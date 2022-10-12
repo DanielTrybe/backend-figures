@@ -9,6 +9,8 @@ export class MySQLUserRepository implements IFiguresRepositoryRule {
     const figure = await this.prisma.figures.findUnique({
       where: { id },
       include: {
+        Serie: { select: { serie: true } },
+        Manufacturer: { select: { manufacturer: true } },
         Images: true,
       },
     });

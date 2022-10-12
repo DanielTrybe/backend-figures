@@ -8,22 +8,7 @@ import {
   figureImagesUpdateSchema,
 } from "../zodschemas/schemasZod";
 import { ZodError } from "zod";
-
-class FormatError {
-  convertError(
-    err: ZodError
-  ): Array<{ message: string; key: (string | number)[]; code: number }> {
-    console.log(err);
-    return err.issues.map((err) => {
-      const error = {
-        message: err.message,
-        key: err.path,
-        code: 400,
-      };
-      return error;
-    });
-  }
-}
+import { FormatError } from "./FormatError";
 
 export class VerifyRequestsBody implements IMiddlewaresRules {
   verifyBodyFigure(

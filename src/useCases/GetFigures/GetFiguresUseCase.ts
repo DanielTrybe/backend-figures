@@ -4,7 +4,7 @@ import { IFiguresRepositoryRule } from "./../../repositories/IFiguresRepositoryR
 export class GetFiguresUseCase {
   constructor(private figuresRepository: IFiguresRepositoryRule) {}
 
-  async execute() {
+  async executeGetFigures() {
     const getFigures = await this.figuresRepository.findAllFigures();
 
     if (!getFigures) {
@@ -12,5 +12,15 @@ export class GetFiguresUseCase {
     }
 
     return getFigures;
+  }
+
+  async executeGetOneFigure(id: number) {
+    const getFigure = await this.figuresRepository.findByID(id);
+
+    if (!getFigure) {
+      throw new Error("No figure");
+    }
+
+    return getFigure;
   }
 }
