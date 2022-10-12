@@ -7,9 +7,27 @@ export class GetFiguresController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     try {
-      const figures = await this.getFiguresUserCase.execute();
+      const figures = await this.getFiguresUserCase.executeGetFigures();
 
       return response.status(200).json(figures);
+    } catch (err: any) {
+      return response
+        .status(400)
+        .json({ message: err.message || "Unexpected error" });
+    }
+  }
+
+  async handleOneFigure(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
+    const { id } = request.params;
+    try {
+      const figure = await this.getFiguresUserCase.executeGetOneFigure(
+        Number(id)
+      );
+
+      return response.status(200).json(figure);
     } catch (err: any) {
       return response
         .status(400)
