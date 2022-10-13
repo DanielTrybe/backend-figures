@@ -1,5 +1,5 @@
 import { PrismaClient, Prisma } from "@prisma/client";
-import { series, manufacturers, images, figures } from "./data";
+import { series, manufacturers, images, figures } from "./data.js";
 
 async function seed() {
   const prisma = new PrismaClient();
