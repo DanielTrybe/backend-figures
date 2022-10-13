@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UpdateManufacturer = exports.UpdateImages = exports.UpdateSerie = exports.UpdateFigure = exports.NewManufacturer = exports.NewImages = exports.NewSerie = exports.NewFigure = exports.Images = exports.Figure = void 0;
+var Figure_1 = require("./Figure");
+Object.defineProperty(exports, "Figure", { enumerable: true, get: function () { return Figure_1.Figure; } });
+var Images_1 = require("./Images");
+Object.defineProperty(exports, "Images", { enumerable: true, get: function () { return Images_1.Images; } });
+var NewFigure_1 = require("./NewFigure");
+Object.defineProperty(exports, "NewFigure", { enumerable: true, get: function () { return NewFigure_1.NewFigure; } });
+Object.defineProperty(exports, "NewSerie", { enumerable: true, get: function () { return NewFigure_1.NewSerie; } });
+Object.defineProperty(exports, "NewImages", { enumerable: true, get: function () { return NewFigure_1.NewImages; } });
+Object.defineProperty(exports, "NewManufacturer", { enumerable: true, get: function () { return NewFigure_1.NewManufacturer; } });
+var UpdateFigure_1 = require("./UpdateFigure");
+Object.defineProperty(exports, "UpdateFigure", { enumerable: true, get: function () { return UpdateFigure_1.UpdateFigure; } });
+Object.defineProperty(exports, "UpdateSerie", { enumerable: true, get: function () { return UpdateFigure_1.UpdateSerie; } });
+Object.defineProperty(exports, "UpdateImages", { enumerable: true, get: function () { return UpdateFigure_1.UpdateImages; } });
+Object.defineProperty(exports, "UpdateManufacturer", { enumerable: true, get: function () { return UpdateFigure_1.UpdateManufacturer; } });

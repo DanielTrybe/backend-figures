@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/sever.ts"
+    "startdev": "tsnd --transpile-only --respawn --ignore-watch node_modules src/sever.ts",
+    "start": "node ./build/sever.js"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"

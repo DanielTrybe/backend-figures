@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+exports.deleteFiguresUserCase = exports.deleteFiguresController = void 0;
+var DeleteFiguresController_1 = require("./DeleteFiguresController");
+var MySQLFiguresDeleteRepository_1 = require("../../repositories/implementations/MySQLFiguresDeleteRepository");
+var DeleteFiguresUseCase_1 = require("./DeleteFiguresUseCase");
+var mySQLDeleteFiguresRepository = new MySQLFiguresDeleteRepository_1.MySQLDeleteFiguresRepository();
+var deleteFiguresUserCase = new DeleteFiguresUseCase_1.DeleteFiguresUseCase(mySQLDeleteFiguresRepository);
+exports.deleteFiguresUserCase = deleteFiguresUserCase;
+var deleteFiguresController = new DeleteFiguresController_1.DeleteFiguresController(deleteFiguresUserCase);
+exports.deleteFiguresController = deleteFiguresController;

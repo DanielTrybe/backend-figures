@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+exports.getFiguresUserCase = exports.getFiguresController = void 0;
+var GetFiguresUseCase_1 = require("./GetFiguresUseCase");
+var GetFiguresController_1 = require("./GetFiguresController");
+var MySQLFiguresRepository_1 = require("./../../repositories/implementations/MySQLFiguresRepository");
+var mysqlFiguresRepository = new MySQLFiguresRepository_1.MySQLUserRepository();
+var getFiguresUserCase = new GetFiguresUseCase_1.GetFiguresUseCase(mysqlFiguresRepository);
+exports.getFiguresUserCase = getFiguresUserCase;
+var getFiguresController = new GetFiguresController_1.GetFiguresController(getFiguresUserCase);
+exports.getFiguresController = getFiguresController;
