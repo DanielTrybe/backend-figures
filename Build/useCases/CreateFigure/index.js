@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createFigureUseCase = exports.createFigureController = void 0;
+const MySQLFiguresCreateRepository_1 = require("../../repositories/implementations/MySQLFiguresCreateRepository");
+const CreateFiguresController_1 = require("./CreateFiguresController");
+const CreateFiguresUseCase_1 = require("./CreateFiguresUseCase");
+const MySQLCreateFigureRepository = new MySQLFiguresCreateRepository_1.MySQLFiguresCreateRepository();
+const createFigureUseCase = new CreateFiguresUseCase_1.CreateFigureUseCase(MySQLCreateFigureRepository);
+exports.createFigureUseCase = createFigureUseCase;
+const createFigureController = new CreateFiguresController_1.CreateFigureController(createFigureUseCase);
+exports.createFigureController = createFigureController;

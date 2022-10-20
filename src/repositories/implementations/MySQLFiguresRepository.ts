@@ -1,9 +1,16 @@
 import { IFiguresRepositoryRule } from "../IFiguresRepositoryRule";
 import { Figure } from "../../entities";
 import { PrismaClient } from "@prisma/client";
+import { env } from "process";
 
 export class MySQLUserRepository implements IFiguresRepositoryRule {
-  private prisma = new PrismaClient();
+  private prisma = new PrismaClient({
+    datasources: {
+      db: {
+        url: env.DATABASE_URL,
+      },
+    },
+  });
 
   async findByID(id: number): Promise<Figure | boolean> {
     const figure = await this.prisma.figures.findUnique({

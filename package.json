@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/sever.ts"
+    "startdev": "tsnd --transpile-only --respawn --ignore-watch node_modules src/sever.ts",
+    "start": "node ./Build/sever.js"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -24,6 +25,7 @@
     "@prisma/client": "^4.3.1",
     "@types/express": "^4.17.14",
     "@types/nodemailer": "^6.4.6",
+    "dotenv": "^16.0.3",
     "express": "^4.18.1",
     "nodemailer": "^6.7.8",
     "uuidv4": "^6.2.13",

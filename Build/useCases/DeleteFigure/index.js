@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.deleteFiguresUserCase = exports.deleteFiguresController = void 0;
+const DeleteFiguresController_1 = require("./DeleteFiguresController");
+const MySQLFiguresDeleteRepository_1 = require("../../repositories/implementations/MySQLFiguresDeleteRepository");
+const DeleteFiguresUseCase_1 = require("./DeleteFiguresUseCase");
+const mySQLDeleteFiguresRepository = new MySQLFiguresDeleteRepository_1.MySQLDeleteFiguresRepository();
+const deleteFiguresUserCase = new DeleteFiguresUseCase_1.DeleteFiguresUseCase(mySQLDeleteFiguresRepository);
+exports.deleteFiguresUserCase = deleteFiguresUserCase;
+const deleteFiguresController = new DeleteFiguresController_1.DeleteFiguresController(deleteFiguresUserCase);
+exports.deleteFiguresController = deleteFiguresController;

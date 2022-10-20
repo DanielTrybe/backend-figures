@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getFiguresUserCase = exports.getFiguresController = void 0;
+const GetFiguresUseCase_1 = require("./GetFiguresUseCase");
+const GetFiguresController_1 = require("./GetFiguresController");
+const MySQLFiguresRepository_1 = require("./../../repositories/implementations/MySQLFiguresRepository");
+const mysqlFiguresRepository = new MySQLFiguresRepository_1.MySQLUserRepository();
+const getFiguresUserCase = new GetFiguresUseCase_1.GetFiguresUseCase(mysqlFiguresRepository);
+exports.getFiguresUserCase = getFiguresUserCase;
+const getFiguresController = new GetFiguresController_1.GetFiguresController(getFiguresUserCase);
+exports.getFiguresController = getFiguresController;
